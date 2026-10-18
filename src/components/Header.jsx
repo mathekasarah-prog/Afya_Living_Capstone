@@ -8,9 +8,9 @@ function Header({ cartCount, onCartClick, user, onLogout }) {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="site-header">
-      <Link to="/" className="logo" onClick={closeMenu}>
-        Afya <span>Living</span>
+    <header className="flex justify-between items-center px-8 py-4 bg-[#14142b] border-b border-solid border-[#292947]">
+      <Link to="/" className="text-[1.4rem] font-bold text-[#7fdb8a]" onClick={closeMenu}>
+        Afya <span className='font-poppins text-3xl font-bold'>Living</span>
       </Link>
 
       <button

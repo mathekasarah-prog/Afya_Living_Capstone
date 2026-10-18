@@ -1,4 +1,14 @@
 @import "tailwindcss";
+@import url('https://googleapis.com'); 
+
+
+@theme {
+  /* This creates the utility class: font-poppins */
+  --font-poppins: "Poppins", sans-serif;
+  
+  /* OR override Tailwind's default sans-serif font entirely */
+  /* --font-sans: "Poppins", sans-serif; */
+}
 
 :root {
   font-family: Arial, Helvetica, sans-serif;

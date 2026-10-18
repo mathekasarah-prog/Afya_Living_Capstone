@@ -1,4 +1,4 @@
-function Category({ categories, selectedCategory, onSelectCategory }) {
+function Categories({ categories, selectedCategory, onSelectCategory }) {
   return (
     <div className="category-filter">
       {categories.map((cat) => (
@@ -14,4 +14,4 @@ function Category({ categories, selectedCategory, onSelectCategory }) {
   );
 }
 
-export default Category;
+export default Categories;

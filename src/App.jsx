@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import ProductList from './components/ProductList';
 import ProductDetail from './components/ProductDetail';
 import Cart from './components/Cart';
-import Category from './components/Category';
+import Categories from './components/Categories';
 import SortControl from './components/SortControl';
 import Checkout from './components/Checkout';
 import OrderConfirmation from './components/OrderConfirmation';
