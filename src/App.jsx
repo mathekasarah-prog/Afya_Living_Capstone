@@ -144,7 +144,7 @@ function App() {
               <>
                 <h1>Welcome to Afya Living</h1>
                 <div className="controls-row">
-                  <Category
+                  <Categories
                     categories={categories}
                     selectedCategory={selectedCategory}
                     onSelectCategory={setSelectedCategory}

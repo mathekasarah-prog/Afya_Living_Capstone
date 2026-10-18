@@ -3,12 +3,24 @@
 
 
 @theme {
+  --color-page: #0d0d1a;
+  --color-surface: #14142b;
+  --color-line: #292947;
+  --color-brand: #7fdb8a;
+  --color-brand-light: #a0e8a8;
+  --color-ink: #f2f2f2;
+  --color-soft: #ccc;
+  --color-muted: #999;
+  --color-danger: #ff6b6b;
+  --font-main: "Roboto", sans-serif;
+}
+/*@theme {
   /* This creates the utility class: font-poppins */
   --font-poppins: "Poppins", sans-serif;
   
   /* OR override Tailwind's default sans-serif font entirely */
   /* --font-sans: "Poppins", sans-serif; */
-}
+}*/
 
 :root {
   font-family: Arial, Helvetica, sans-serif;
