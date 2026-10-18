@@ -15,7 +15,6 @@ import Login from './components/Login';
 import Contact from './components/Contact';
 import About from './components/About';
 import Admin from './components/Admin';
-import './App.css';
 
 function App() {
   const [cart, setCart] = useState(() => {
