@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
+import Hero from './components/Hero';
 import Footer from './components/Footer';
 import ProductList from './components/ProductList';
 import ProductDetail from './components/ProductDetail';
@@ -139,26 +140,32 @@ function App() {
       <main>
         <Routes>
           <Route
-            path="/"
-            element={
-              <>
-                <h1>Welcome to Afya Living</h1>
-                <div className="controls-row">
-                  <Categories
-                    categories={categories}
-                    selectedCategory={selectedCategory}
-                    onSelectCategory={setSelectedCategory}
-                  />
-                  <SortControl sortOption={sortOption} onSortChange={setSortOption} />
-                </div>
-                {loading && <p>Loading products...</p>}
-                {error && <p>Error loading products: {error}</p>}
-                {!loading && !error && (
-                  <ProductList products={filteredProducts} onAddToCart={handleAddToCart} />
-                )}
-              </>
-            }
-          />
+  path="/"
+  element={
+    <>
+      <Hero />
+
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mb-8">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#708c63]">
+            Your self-care essentials
+          </p>
+
+          <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#102a22] sm:text-4xl">
+            Shop our collection
+          </h2>
+
+          <p className="mt-3 max-w-2xl leading-7 text-gray-600">
+            Find your new favourites for skincare, hair care and everyday
+            wellness.
+          </p>
+        </div>
+
+        {/* Keep your existing category filter, sorting control and ProductList here. */}
+      </section>
+    </>
+  }
+/>
           <Route
             path="/product/:id"
             element={<ProductDetail onAddToCart={handleAddToCart} />}
