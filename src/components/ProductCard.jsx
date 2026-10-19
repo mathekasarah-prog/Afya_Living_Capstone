@@ -1,10 +1,11 @@
 
 import { Link } from 'react-router-dom';
+import API_BASE_URL from '../api';
 
 function ProductCard({ product, onAddToCart }) {
   const imageUrl = product.image?.startsWith('http')
-    ? product.image
-    : `http://localhost:3000/${(product.image || '').replace(/^\/+/, '')}`;
+  ? product.image
+  : `${API_BASE_URL}/${(product.image || '').replace(/^\/+/, '')}`;
 
   const inStock = Number(product.stock) > 0;
 
@@ -39,7 +40,7 @@ function ProductCard({ product, onAddToCart }) {
 
       <div className="mt-auto min-w-0 p-4 pt-3">
         <p className="text-lg font-bold text-[#244d38]">
-          ${Number(product.price).toFixed(2)}
+          KSh {Number(product.price).toLocaleString('en-KE')}
         </p>
 
         <p

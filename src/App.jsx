@@ -15,6 +15,7 @@ import Login from './components/Login';
 import Contact from './components/Contact';
 import About from './components/About';
 import Admin from './components/Admin';
+import { apiRequest } from './api';
 
 function App() {
   const [cart, setCart] = useState(() => {
@@ -34,19 +35,15 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/products')
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to fetch products');
-        return res.json();
-      })
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+    apiRequest('/api/products')
+  .then((data) => {
+    setProducts(data);
+    setLoading(false);
+  })
+  .catch((err) => {
+    setError(err.message);
+    setLoading(false);
+  });
   }, []);
 
   useEffect(() => {
@@ -160,7 +157,29 @@ function App() {
           </p>
         </div>
 
-        {/* Keep your existing category filter, sorting control and ProductList here. */}
+                {loading && <p>Loading products...</p>}
+        {error && <p className="text-red-600">Error: {error}</p>}
+
+        {!loading && !error && (
+          <>
+            <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+              <Categories
+                categories={categories}
+                selectedCategory={selectedCategory}
+                onSelectCategory={setSelectedCategory}
+              />
+              <SortControl
+                sortOption={sortOption}
+                onSortChange={setSortOption}
+              />
+            </div>
+
+            <ProductList
+              products={filteredProducts}
+              onAddToCart={handleAddToCart}
+            />
+          </>
+        )}
       </section>
     </>
   }
