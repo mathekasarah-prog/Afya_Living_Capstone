@@ -62,7 +62,7 @@ function Hero() {
           <div className="absolute -inset-3 rounded-[2rem] bg-[#e5eadc] sm:-inset-5" />
 
           <img
-            src="src/assets/Afyahero1.jpeg"
+            src="src/assets/Afyagiftpack.jpeg"
             alt="Natural wellness and skincare products arranged with botanical leaves"
             className="relative aspect-[4/3] w-full rounded-[1.5rem] object-cover shadow-lg sm:rounded-[2rem]"
             onError={(event) => {
