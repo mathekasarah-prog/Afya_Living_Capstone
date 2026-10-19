@@ -16,6 +16,19 @@ function ProductCard({ product, onAddToCart }) {
         className="block min-w-0 p-3 pb-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#102a22]"
       >
         <div className="flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl bg-[#f0f3eb]">
+          <div className="relative overflow-hidden rounded-2xl bg-[#f1f1ec] p-4">
+        {product.badge && (
+         <span className="absolute left-6 top-6 z-10 rounded-full bg-[#708c63] px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-sm">
+        {product.badge}
+         </span>
+       )}
+
+       <img
+       src={imageUrl}
+       alt={product.name}
+       className="aspect-square w-full rounded-xl object-cover"
+    />
+      </div>
           <img
             src={imageUrl}
             alt={product.name}
