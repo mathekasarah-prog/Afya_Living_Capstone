@@ -1,11 +1,28 @@
-import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 function Header({ cartCount, onCartClick, user, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   function closeMenu() {
     setMenuOpen(false);
+  }
+
+  function handleShopClick(e) {
+    closeMenu();
+    if (pathname === '/') {
+      e.preventDefault();
+      document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   const linkClass = ({ isActive }) =>
@@ -15,8 +32,22 @@ function Header({ cartCount, onCartClick, user, onLogout }) {
         : 'text-gray-600 hover:bg-[#f0f3eb] hover:text-[#102a22]'
     }`;
 
+      const desktopLinkClass = ({ isActive }) =>
+    `relative rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200
+     after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:origin-left after:rounded-full
+     after:bg-[#7b956e] after:transition-transform after:duration-300 ${
+       isActive
+         ? 'text-[#102a22] after:scale-x-100'
+         : 'text-gray-600 after:scale-x-0 hover:text-[#102a22] hover:after:scale-x-100'
+     }`;
+
   return (
-    <header className="sticky top-0 z-50 border-b border-[#e3e5dc] bg-white/95 shadow-sm backdrop-blur">
+    //<header className="sticky top-0 z-50 border-b border-[#e3e5dc] bg-white/95 shadow-sm backdrop-blur">
+    <header
+     className={`sticky top-0 z-50 border-b bg-white/95 backdrop-blur transition-all duration-300 ${
+     scrolled ? 'border-transparent shadow-md' : 'border-[#e3e5dc] shadow-none'
+     }`}
+>
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
 
         {/* Brand */}
@@ -32,17 +63,17 @@ function Header({ cartCount, onCartClick, user, onLogout }) {
         </Link>
 
         {/* Desktop navigation */}
-        <nav className="hidden items-center gap-1 md:flex">
-          <NavLink to="/" end className={linkClass}>
-            Shop
-          </NavLink>
-          <NavLink to="/about" className={linkClass}>
-            About
-          </NavLink>
-          <NavLink to="/contact" className={linkClass}>
-            Contact
-          </NavLink>
-        </nav>
+      <nav className="hidden items-center gap-1 md:flex">
+      <NavLink to="/" end className={desktopLinkClass} onClick={handleShopClick}>
+       Shop
+      </NavLink>
+      <NavLink to="/about" className={desktopLinkClass}>
+       About
+      </NavLink>
+      <NavLink to="/contact" className={desktopLinkClass}>
+       Contact
+      </NavLink>
+      </nav>
 
         {/* Account and cart actions */}
         <div className="hidden items-center gap-2 md:flex">
@@ -106,7 +137,7 @@ function Header({ cartCount, onCartClick, user, onLogout }) {
           className="border-t border-[#e3e5dc] bg-white px-4 py-4 shadow-lg md:hidden"
         >
           <nav className="mx-auto flex max-w-7xl flex-col gap-1">
-            <NavLink to="/" end className={linkClass} onClick={closeMenu}>
+            <NavLink to="/" end className={linkClass} onClick={handleShopClick}>
               Shop
             </NavLink>
             <NavLink to="/about" className={linkClass} onClick={closeMenu}>

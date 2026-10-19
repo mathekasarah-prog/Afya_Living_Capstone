@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
@@ -16,6 +16,13 @@ import Contact from './components/Contact';
 import About from './components/About';
 import Admin from './components/Admin';
 import { apiRequest } from './api';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
 
 function App() {
   const [cart, setCart] = useState(() => {
@@ -119,6 +126,7 @@ function App() {
 
   return (
     <div className="app">
+      <ScrollToTop />
       <Header
         cartCount={cartCount}
         onCartClick={() => setIsCartOpen(true)}
@@ -141,7 +149,7 @@ function App() {
     <>
       <Hero />
 
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <section id="shop" className="scroll-mt-24 mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-8">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#708c63]">
             Your self-care essentials

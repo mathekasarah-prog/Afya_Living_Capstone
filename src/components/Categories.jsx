@@ -1,4 +1,3 @@
-
 function Categories({ categories, selectedCategory, onSelectCategory }) {
   return (
     <div className="flex min-w-0 flex-wrap gap-2" aria-label="Filter products by category">

@@ -1,7 +1,11 @@
-
 import { Link } from 'react-router-dom';
 
 function Hero() {
+  function scrollToShop(e) {
+    e.preventDefault();
+    document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' });
+  }
+
   return (
     <section className="overflow-hidden bg-[#f7f4ec]">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-24">
@@ -27,7 +31,7 @@ function Hero() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               to="/"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={scrollToShop}
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#102a22] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#244d38] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#102a22]"
             >
               Explore the collection
@@ -62,7 +66,7 @@ function Hero() {
           <div className="absolute -inset-3 rounded-[2rem] bg-[#e5eadc] sm:-inset-5" />
 
           <img
-            src="src/assets/Afyagiftpack.jpeg"
+            src="/Afyagiftpack.jpeg"
             alt="Natural wellness and skincare products arranged with botanical leaves"
             className="relative aspect-[4/3] w-full rounded-[1.5rem] object-cover shadow-lg sm:rounded-[2rem]"
             onError={(event) => {
