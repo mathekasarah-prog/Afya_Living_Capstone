@@ -18,7 +18,7 @@ function Hero() {
 
           <h1 className="max-w-xl text-4xl font-bold leading-tight tracking-tight text-[#102a22] sm:text-5xl lg:text-6xl">
             Wellness,
-            <span className="block font-normal italic text-[#708c63]">
+            <span className="block font-['Dancing_Script'] text-[#708c63]">
               Naturally.
             </span>
           </h1>

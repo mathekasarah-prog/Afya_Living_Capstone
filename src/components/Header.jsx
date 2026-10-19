@@ -56,7 +56,7 @@ function Header({ cartCount, onCartClick, user, onLogout }) {
           onClick={closeMenu}
           className="shrink-0 text-2xl font-bold tracking-tight text-[#102a22] sm:text-3xl"
         >
-          Afya <span className="text-[#7b956e]">Living</span>
+          Afya <span className="text-[#7b956e] font-['Dancing_Script']">Living</span>
           <span className="mt-0.5 block text-[9px] font-medium uppercase tracking-[0.25em] text-gray-500">
             Natural wellness
           </span>
