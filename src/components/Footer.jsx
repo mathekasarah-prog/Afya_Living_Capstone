@@ -29,10 +29,10 @@ function Footer({ user }) {
               Contact
             </Link>
             {user?.isAdmin && (
-              <Link to="/admin" className="font-semibold text-[#526f4b]">
-                Inventory Admin
-              </Link>
-            )}
+            <Link to="/admin"className="font-semibold text-[#526f4b] hover:text-[#102A22] transition-colors">
+              Admin
+            </Link>
+          )}
           </nav>
         </div>
 
