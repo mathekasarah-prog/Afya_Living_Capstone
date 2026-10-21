@@ -2,6 +2,17 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { apiRequest } from '../api';
 
+const STORE_NAME = 'Afya Living';
+const STORE_ADDRESS =
+  'Store 11A, 2nd Floor, RNG Plaza, Ronald Ngala Street, Nairobi, Kenya';
+
+const googleMapsUrl =
+  `https://www.google.com/maps/search/?api=1&query=${
+    encodeURIComponent(
+      `${STORE_NAME}, ${STORE_ADDRESS}`
+    )
+  }`;
+
 function Checkout({ cart, onOrderComplete }) {
   const navigate = useNavigate();
 
@@ -230,8 +241,7 @@ function Checkout({ cart, onOrderComplete }) {
                 </div>
               </fieldset>
 
-              {/* Delivery address (only for delivery) */}
-              {deliveryMethod === 'delivery' && (
+          {deliveryMethod === 'delivery' && (
                 <div>
                   <label
                     htmlFor="checkout-address"
@@ -253,8 +263,41 @@ function Checkout({ cart, onOrderComplete }) {
                 </div>
               )}
 
+    {deliveryMethod === 'pickup' && (
+       <div className="mt-4 rounded-2xl border border-[#e3e5dc] bg-white p-5">
+       <div className="flex items-start gap-3">
+        <span className="text-2xl" aria-hidden="true">
+         📍
+        </span>
+
+        <div>
+        <h3 className="text-lg font-bold text-[#102a22]">
+          Pick up at Afya Living
+        </h3>
+
+        <p className="mt-2 text-sm leading-6 text-gray-600">
+          Store 11A, 2nd Floor, RNG Plaza,
+          Ronald Ngala Street, Nairobi, Kenya.
+        </p>
+
+        <a
+          href={googleMapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center justify-center
+            rounded-full bg-[#102a22] px-5 py-3
+            font-semibold text-white transition
+            hover:bg-[#244d38]"
+        >
+          Get Directions on Google Maps →
+        </a>
+      </div>
+    </div>
+  </div>
+)}
+
               {/* Payment method (always shown) */}
-              <fieldset>
+            <fieldset>
                 <legend className="mb-3 text-sm font-semibold text-[#102a22]">
                   Payment method
                 </legend>

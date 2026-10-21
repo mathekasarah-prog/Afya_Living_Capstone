@@ -1,262 +1,261 @@
-# Afya Living 🌿
-### Natural Wellness & Self-Care
+# Afya Living | Natural Wellness & Self-Care
 
-Afya Living is a responsive e-commerce web application designed to make natural-inspired skincare, haircare, wellness essentials, and self-care products easy to explore and purchase.
+**Natural • Simple • Beautiful**
 
-The project is built with React and connects to a separate Express.js backend API to retrieve product information and process application requests. It combines a clean, nature-inspired design with interactive shopping features to provide a simple and enjoyable user experience.
+Afya Living is a responsive e-commerce web application for discovering and shopping for natural skincare, haircare, wellness products, and self-care gift sets. The project combines a clean, nature-inspired storefront with product management, shopping cart functionality, and an order checkout experience.
 
-## ✨ Features
+Developed as an individual Frontend Capstone project, Afya Living demonstrates the practical application of React, reusable components, state management, API integration, routing, and responsive user interface design.
 
-### Product Shopping
-- Browse products retrieved from the backend API.
-- View individual product details.
-- Explore products by category.
-- Sort products using available sorting options.
-- View product prices and stock availability.
-- Add products to the shopping cart.
-- Update product quantities and remove items from the cart.
-- View the cart subtotal.
+## Table of Contents
 
-### Checkout and Orders
-- Enter customer and delivery information.
-- Choose a delivery method.
-- Submit orders to the backend.
-- View an order confirmation and order reference after successful checkout.
-- Receive feedback when requests fail or are being processed.
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Application Structure](#application-structure)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [API Endpoints](#api-endpoints)
+- [Store Location](#store-location)
+- [Security and Limitations](#security-and-limitations)
+- [Future Improvements](#future-improvements)
+- [Author](#author)
 
-### User Accounts
-- Register a new account.
-- Log in using account credentials.
-- Display account-related navigation options.
-- Provide administrative access to inventory management for authorized users.
+## Project Overview
 
-### Additional Pages
-- About Afya Living.
-- Contact form.
-- Newsletter subscription.
-- Product inventory management for authorized administrators.
+Afya Living promotes convenient access to natural wellness and self-care products through a user-friendly online shopping experience.
 
-### User Experience
-- Responsive layouts for desktop, tablet, and mobile screens.
+The interface uses a nature-inspired visual identity, with earthy colors, clean layouts, and responsive components designed to provide a consistent experience across desktop and mobile devices.
+
+The application includes a React frontend and a separate Node.js/Express backend for product data and order processing.
+
+## Features
+
+### Customer Experience
+
+- **Product catalog:** Retrieve and display products from the backend API.
+- **Product discovery:** Browse products by category, including Skincare, Haircare, Wellness, and Gift Sets.
+- **Product details:** View product information, pricing, images, and available stock.
+- **Shopping cart:** Add products, adjust quantities, and review selected items.
+- **Checkout:** Enter customer details and submit an order.
+- **Delivery options:** Choose store pickup or home delivery.
+- **Payment selection:** Select an available payment method, including M-Pesa or bank transfer.
+- **Order confirmation:** View an order reference after a successful order submission.
+- **Account access:** Register and log in to the application.
+- **Contact and subscription forms:** Submit enquiries and newsletter subscription requests.
+- **Store directions:** Open Google Maps to find the physical pickup location.
+
+### Inventory Administration
+
+- **Protected admin interface:** Restrict inventory management to authorized administrators.
+- **Product inventory:** View product names, categories, prices, and stock quantities.
+- **Stock management:** Update product quantities through the backend API.
+- **Validation and feedback:** Display loading states, errors, and success messages when managing inventory.
+
+### User Interface
+
+- Responsive layouts for different screen sizes.
 - Reusable React components.
-- Form validation and error feedback.
-- Loading and empty states where implemented.
-- Persistent shopping cart and user state using browser local storage.
+- Client-side routing with React Router.
+- Tailwind CSS styling.
+- Form validation and user feedback.
+- Loading, error, and empty states where implemented.
 
-## 🛠️ Technologies Used
+## Technologies Used
 
-### Frontend
-- React
-- JavaScript (ES6+)
-- Vite
-- React Router
-- Tailwind CSS
-- HTML5
-- CSS3
-- Fetch API
+| Technology | Purpose |
+|---|---|
+| React | Building reusable UI components |
+| JavaScript (ES6+) | Application logic and interactions |
+| Vite | Frontend development server and build tooling |
+| Tailwind CSS | Responsive styling and UI design |
+| React Router | Client-side navigation |
+| Node.js | Backend JavaScript runtime |
+| Express.js | REST API and server-side request handling |
+| JSON files | File-based product, user, and order storage in the current backend |
+| JWT | Authentication tokens and authorization |
+| bcrypt | Password hashing |
+| Git and GitHub | Version control and source code management |
 
-### Backend
-- Node.js
-- Express.js
-- REST API
-- JSON files for data storage
-- bcrypt for password hashing
-- JSON Web Tokens (JWT) for authentication
+## Application Structure
 
-### Development Tools
-- Visual Studio Code
-- Git and GitHub
-- npm
-- Browser Developer Tools
-
-## 📁 Project Structure
-
-The frontend and backend are maintained in separate project directories.
-
-### React Frontend
+The application is organized into a frontend React project and a separate backend project.
 
 ```text
-Afya_living_capstone/
-├── public/
-├── src/
-│   ├── components/
-│   │   ├── Header.jsx
-│   │   ├── Footer.jsx
-│   │   ├── ProductCard.jsx
-│   │   ├── ProductList.jsx
-│   │   ├── Cart.jsx
-│   │   ├── CartItem.jsx
-│   │   ├── Checkout.jsx
-│   │   ├── Contact.jsx
-│   │   ├── Login.jsx
-│   │   ├── Signup.jsx
-│   │   └── ...
-│   ├── api.js
-│   ├── App.jsx
-│   ├── App.css
-│   ├── index.css
-│   └── main.jsx
-├── .env
-├── package.json
-└── README.md
+Afya-Living/
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── api.js
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   ├── Images/
+│   ├── package.json
+│   └── README.md
+│
+└── backend/
+    ├── server.js
+    ├── products.json
+    ├── users.json
+    ├── orders.json
+    └── .env
 ```
 
-### Express Backend
+*Note: This is an illustrative structure. Actual folder names and file locations may differ in your repository.*
 
-```text
-Fetch_API_Afya_Living/
-├── Images/
-├── products.json
-├── orders.json
-├── users.json
-├── subscribers.json
-├── server.js
-└── package.json
-```
+## Getting Started
 
-The backend entry file and data files may have different names depending on the final project structure.
-
-## 🚀 Getting Started
-
-Follow these instructions to run the application locally.
+Follow these steps to run Afya Living locally.
 
 ### Prerequisites
 
 Install the following:
 
-- Node.js and npm
+- [Node.js](https://nodejs.org/) and npm
 - Git
-- Visual Studio Code or another code editor
+- A code editor such as Visual Studio Code
 
-### 1. Set Up the Backend
+### 1. Clone the Repository
 
-Open a terminal and navigate to the backend directory:
+Replace the placeholder below with your actual GitHub repository URL.
 
 ```bash
-cd path/to/Fetch_API_Afya_Living
+git clone <YOUR_GITHUB_REPOSITORY_URL>
+cd <YOUR_PROJECT_FOLDER>
 ```
 
-Install the backend dependencies:
+### 2. Install Frontend Dependencies
+
+Open a terminal in the React frontend directory and run:
 
 ```bash
 npm install
 ```
 
-Start the Express server using the appropriate script in the backend `package.json`. For example:
+### 3. Configure the Backend
+
+Open another terminal in the backend directory and install its dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file in the backend directory and configure the environment variables listed below.
+
+Ensure that the required JSON data files exist and contain valid JSON before starting the server.
+
+### 4. Start the Backend Server
+
+From the backend directory, run:
 
 ```bash
 node server.js
 ```
 
-The backend should be available at:
+The API is configured to run at:
 
 ```text
 http://localhost:3000
 ```
 
-### 2. Verify the Backend API
+### 5. Start the Frontend
 
-Open the following URL in your browser:
-
-```text
-http://localhost:3000/api/products
-```
-
-The endpoint should return the product data in JSON format.
-
-Product images should also be accessible through the backend, for example:
-
-```text
-http://localhost:3000/Images/baobab.jpeg
-```
-
-Use the actual image filename available in the `Images` directory.
-
-### 3. Set Up the Frontend
-
-Open a second terminal and navigate to the React project:
-
-```bash
-cd path/to/Afya_living_capstone
-```
-
-Install the frontend dependencies:
-
-```bash
-npm install
-```
-
-Create a `.env` file in the frontend root directory and configure the backend URL:
-
-```env
-VITE_API_URL=http://localhost:3000
-```
-
-Restart the Vite development server whenever you change environment variables.
-
-### 4. Run the Frontend
+In a separate terminal, navigate to the frontend directory and run:
 
 ```bash
 npm run dev
 ```
 
-```text
-http://localhost:5173
+Open the local URL displayed by Vite in your browser. It is commonly `http://localhost:5173`, but the port may vary.
+
+### 6. Build the Frontend
+
+To check that the application can be built for production, run:
+
+```bash
+npm run build
+```
+
+To preview the production build locally, run:
+
+```bash
+npm run preview
+```
+
+If a lint script is configured in `package.json`, you can also run:
+
+```bash
+npm run lint
 ```
 
 
-## 🔌 API Endpoints
+## API Endpoints
 
-The frontend communicates with the Express backend through HTTP requests.
+The current Express backend provides endpoints for the application's main operations.
 
 | Method | Endpoint | Purpose |
 |---|---|---|
-| GET | `/api/products` | Retrieve products |
-| PUT | `/api/products/:id/stock` | Update product stock with authorized access |
+| GET | `/api/products` | Retrieve the product catalog |
+| PUT | `/api/products/:id/stock` | Update a product's stock quantity |
 | POST | `/api/orders` | Submit a customer order |
-| POST | `/api/signup` | Register a user |
-| POST | `/api/login` | Authenticate a user |
-| POST | `/api/contact` | Submit a contact message |
+| POST | `/api/signup` | Register a customer |
+| POST | `/api/login` | Authenticate a customer |
+| POST | `/api/contact` | Submit a contact enquiry |
 | POST | `/api/subscribe` | Submit a newsletter subscription |
-| POST | `/api/cart` | Submit cart data to the backend |
+| POST | `/api/cart` | Submit cart-related data |
 
-Endpoint availability and validation depend on the backend implementation.
+Protected operations require the appropriate authentication and authorization checks.
 
-## 🧩 React Concepts Demonstrated
+## Store Location
 
-This project applies core frontend development concepts, including:
+**Afya Living**
 
-- **Components:** Building reusable interface elements.
-- **Props:** Passing product data and event handlers between components.
-- **State:** Managing products, cart contents, form inputs, and user information.
-- **Events:** Handling button clicks, form submissions, and quantity changes.
-- **Conditional rendering:** Displaying loading indicators, errors, stock status, and empty states.
-- **Hooks:** Using React hooks such as `useState` and `useEffect`.
-- **React Router:** Navigating between pages without full page reloads.
-- **API integration:** Retrieving and submitting data through asynchronous HTTP requests.
-- **Responsive design:** Adapting the interface to different screen sizes.
+Store 11A, Second Floor  
+RNG Plaza, Ronald Ngala Street  
+Nairobi, Kenya
 
+Customers selecting store pickup can use Google Maps to locate the store and plan their journey.
 
+[Find Afya Living on Google Maps](https://www.google.com/maps/search/?api=1&query=Afya%20Living%2C%20Store%2011A%2C%20Second%20Floor%2C%20RNG%20Plaza%2C%20Ronald%20Ngala%20Street%2C%20Nairobi%2C%20Kenya)
 
-## 🌱 Future Improvements
+## Security and Limitations
 
-Potential future enhancements include:
+Afya Living is an educational capstone project. The current backend uses JSON-file storage for application data.
 
-- Integrating a production database such as MongoDB.
-- Adding automated frontend and backend tests.
-- Implementing secure order history and order tracking.
-- Improving inventory management.
-- Integrating a secure payment provider.
+Before deploying the application for real customers, the following areas require additional attention:
+
+- Move persistent product, customer, and order data to a suitable database.
+- Enforce authorization and input validation on every protected API endpoint.
+- Avoid trusting prices, totals, stock quantities, or user roles supplied by the client.
+- Use secure authentication practices, HTTPS, and appropriate token handling.
+- Handle simultaneous orders and stock updates safely.
+- Configure production environment variables and restrict access to sensitive data.
+- Verify payment receipts before marking orders as paid.
+
+Selecting M-Pesa or bank transfer does not, by itself, process a payment. Actual payment processing requires a suitable payment integration or a verified manual-payment workflow.
+
+## Future Improvements
+
+Potential improvements include:
+
+- Integrating a production database such as Firebase Firestore or MongoDB.
+- Adding order history and customer account management.
+- Introducing a complete admin dashboard for products and orders.
+- Integrating a payment provider for supported payment methods.
+- Adding delivery fee calculation and order tracking.
+- Improving product search, filtering, and sorting.
+- Adding automated tests and accessibility checks.
 - Deploying the frontend and backend to production hosting.
 
-## 👩‍💻 Author
+## Author
 
-**Sarah Musenya**
+**Sarah Matheka**
 
 Frontend Capstone Project
 
 Afya Living — Natural Wellness & Self-Care
 
-## 📄 License
+---
 
-This project was developed for educational and portfolio purposes. 
+*Built with React, JavaScript, Tailwind CSS, and a commitment to making natural self-care easier to discover.*
