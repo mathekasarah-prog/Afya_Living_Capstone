@@ -121,8 +121,8 @@ Install the following:
 Replace the placeholder below with your actual GitHub repository URL.
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
-cd <YOUR_PROJECT_FOLDER>
+git clone <https://github.com/mathekasarah-prog/Afya_Living_Capstone.git>
+cd <Afya_Living_Capstone>
 ```
 
 ### 2. Install Frontend Dependencies
