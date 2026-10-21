@@ -9,14 +9,14 @@ function Checkout({ cart, onOrderComplete }) {
   const [phone, setPhone] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState('pickup');
   const [address, setAddress] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('mpesa');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
   const safeCart = cart ?? [];
 
   const total = safeCart.reduce(
-    (sum, item) =>
-      sum + Number(item.price) * Number(item.quantity),
+    (sum, item) => sum + Number(item.price) * Number(item.quantity),
     0
   );
 
@@ -49,39 +49,24 @@ function Checkout({ cart, onOrderComplete }) {
     setSubmitting(true);
 
     try {
-      const response = await fetch('http://localhost:3000/api/orders', {
+      const data = await apiRequest('/api/orders', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: name.trim(),
           phone: phone.trim(),
           deliveryMethod,
-          address:
-            deliveryMethod === 'delivery' ? address.trim() : null,
+          paymentMethod,
+          address: deliveryMethod === 'delivery' ? address.trim() : null,
           cart: orderCart,
         }),
       });
 
-      const data = await apiRequest('/api/orders', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    name: name.trim(),
-    phone: phone.trim(),
-    deliveryMethod,
-    address: deliveryMethod === 'delivery' ? address.trim() : null,
-    cart: orderCart,
-  }),
-});
-
-onOrderComplete();
-navigate(`/order-confirmation/${data.orderId}`);
+      onOrderComplete();
+      navigate(`/order-confirmation/${data.orderId}`);
     } catch (err) {
       setError(
-        err.message ||
-          'Unable to connect to the server. Please try again.'
+        err.message || 'Unable to connect to the server. Please try again.'
       );
     } finally {
       setSubmitting(false);
@@ -135,15 +120,14 @@ navigate(`/order-confirmation/${data.orderId}`);
         <div className="grid min-w-0 grid-cols-1 items-start gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-8">
           {/* Checkout form */}
           <section className="min-w-0 rounded-2xl border border-[#e3e5dc] bg-white p-5 shadow-sm sm:p-8">
-            <h2 className="text-xl font-bold text-[#102a22]">
-              Your details
-            </h2>
+            <h2 className="text-xl font-bold text-[#102a22]">Your details</h2>
 
             <p className="mt-2 text-sm leading-6 text-gray-500">
               Please provide accurate contact information for your order.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+              {/* Full name */}
               <div>
                 <label
                   htmlFor="checkout-name"
@@ -164,6 +148,7 @@ navigate(`/order-confirmation/${data.orderId}`);
                 />
               </div>
 
+              {/* Phone number */}
               <div>
                 <label
                   htmlFor="checkout-phone"
@@ -184,17 +169,20 @@ navigate(`/order-confirmation/${data.orderId}`);
                 />
               </div>
 
+              {/* Delivery method */}
               <fieldset>
                 <legend className="mb-3 text-sm font-semibold text-[#102a22]">
                   How would you like to receive your order?
                 </legend>
 
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  <label className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${
-                    deliveryMethod === 'pickup'
-                      ? 'border-[#708c63] bg-[#f0f3eb]'
-                      : 'border-[#e3e5dc] hover:bg-gray-50'
-                  }`}>
+                  <label
+                    className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${
+                      deliveryMethod === 'pickup'
+                        ? 'border-[#708c63] bg-[#f0f3eb]'
+                        : 'border-[#e3e5dc] hover:bg-gray-50'
+                    }`}
+                  >
                     <input
                       type="radio"
                       name="deliveryMethod"
@@ -214,11 +202,13 @@ navigate(`/order-confirmation/${data.orderId}`);
                     </span>
                   </label>
 
-                  <label className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${
-                    deliveryMethod === 'delivery'
-                      ? 'border-[#708c63] bg-[#f0f3eb]'
-                      : 'border-[#e3e5dc] hover:bg-gray-50'
-                  }`}>
+                  <label
+                    className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${
+                      deliveryMethod === 'delivery'
+                        ? 'border-[#708c63] bg-[#f0f3eb]'
+                        : 'border-[#e3e5dc] hover:bg-gray-50'
+                    }`}
+                  >
                     <input
                       type="radio"
                       name="deliveryMethod"
@@ -240,6 +230,7 @@ navigate(`/order-confirmation/${data.orderId}`);
                 </div>
               </fieldset>
 
+              {/* Delivery address (only for delivery) */}
               {deliveryMethod === 'delivery' && (
                 <div>
                   <label
@@ -261,6 +252,67 @@ navigate(`/order-confirmation/${data.orderId}`);
                   />
                 </div>
               )}
+
+              {/* Payment method (always shown) */}
+              <fieldset>
+                <legend className="mb-3 text-sm font-semibold text-[#102a22]">
+                  Payment method
+                </legend>
+
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  <label
+                    className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${
+                      paymentMethod === 'mpesa'
+                        ? 'border-[#708c63] bg-[#f0f3eb]'
+                        : 'border-[#e3e5dc] hover:bg-gray-50'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="mpesa"
+                      checked={paymentMethod === 'mpesa'}
+                      onChange={(event) => setPaymentMethod(event.target.value)}
+                      className="mt-1 accent-[#244d38]"
+                    />
+
+                    <span>
+                      <span className="block font-semibold text-[#102a22]">
+                        M-Pesa
+                      </span>
+                      <span className="mt-1 block text-sm text-gray-500">
+                        Pay using M-Pesa instructions provided after ordering.
+                      </span>
+                    </span>
+                  </label>
+
+                  <label
+                    className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${
+                      paymentMethod === 'bank_transfer'
+                        ? 'border-[#708c63] bg-[#f0f3eb]'
+                        : 'border-[#e3e5dc] hover:bg-gray-50'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="bank_transfer"
+                      checked={paymentMethod === 'bank_transfer'}
+                      onChange={(event) => setPaymentMethod(event.target.value)}
+                      className="mt-1 accent-[#244d38]"
+                    />
+
+                    <span>
+                      <span className="block font-semibold text-[#102a22]">
+                        Bank transfer
+                      </span>
+                      <span className="mt-1 block text-sm text-gray-500">
+                        Bank payment instructions will be provided after ordering.
+                      </span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
 
               {error && (
                 <div
@@ -287,9 +339,7 @@ navigate(`/order-confirmation/${data.orderId}`);
 
           {/* Order summary */}
           <aside className="min-w-0 rounded-2xl border border-[#e3e5dc] bg-white p-5 shadow-sm sm:p-8 lg:sticky lg:top-28">
-            <h2 className="text-xl font-bold text-[#102a22]">
-              Order summary
-            </h2>
+            <h2 className="text-xl font-bold text-[#102a22]">Order summary</h2>
 
             <p className="mt-2 text-sm text-gray-500">
               {safeCart.length} {safeCart.length === 1 ? 'product' : 'products'}
@@ -312,7 +362,8 @@ navigate(`/order-confirmation/${data.orderId}`);
                   </div>
 
                   <p className="shrink-0 text-sm font-semibold text-[#244d38]">
-                    KSh {(Number(item.price) * Number(item.quantity)).toLocaleString('en-KE')}
+                    KSh{' '}
+                    {(Number(item.price) * Number(item.quantity)).toLocaleString('en-KE')}
                   </p>
                 </div>
               ))}
@@ -320,9 +371,7 @@ navigate(`/order-confirmation/${data.orderId}`);
 
             <div className="mt-4 border-t border-[#e3e5dc] pt-5">
               <div className="flex items-center justify-between gap-4">
-                <span className="font-semibold text-gray-600">
-                  Subtotal
-                </span>
+                <span className="font-semibold text-gray-600">Subtotal</span>
 
                 <span className="text-xl font-bold text-[#102a22]">
                   KSh {total.toLocaleString('en-KE')}

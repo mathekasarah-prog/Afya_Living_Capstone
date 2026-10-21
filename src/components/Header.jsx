@@ -73,6 +73,11 @@ function Header({ cartCount, onCartClick, user, onLogout }) {
       <NavLink to="/contact" className={desktopLinkClass}>
        Contact
       </NavLink>
+      {user?.isAdmin && (
+      <NavLink to="/admin" className={desktopLinkClass}>
+       Admin
+      </NavLink>
+       )}
       </nav>
 
         {/* Account and cart actions */}
@@ -146,6 +151,11 @@ function Header({ cartCount, onCartClick, user, onLogout }) {
             <NavLink to="/contact" className={linkClass} onClick={closeMenu}>
               Contact
             </NavLink>
+            {user?.isAdmin && (
+            <NavLink to="/admin" className={linkClass} onClick={closeMenu}>
+             Admin
+            </NavLink>
+            )}
           </nav>
 
           <div className="mx-auto mt-4 flex max-w-7xl flex-wrap items-center gap-2 border-t border-gray-100 pt-4">
